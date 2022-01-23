@@ -1,5 +1,4 @@
 from math import sqrt
-from turtle import clone, color
 from Brain import Brain
 from time import sleep
 
