@@ -35,7 +35,7 @@ class Dot:
         update_array(self.position, self.velocity)
 
     
-    def update(self):
+    def update(self, obsticals):
         if not self.dead and not self.reached_goal:
             self.move()
 
@@ -44,6 +44,11 @@ class Dot:
 
             if self.position[1]+Dot.diameter >= self.root.winfo_height() - 15 or self.position[1]<0:
                 self.dead = True
+                
+            for obstical in obsticals.obsticals:
+                no_zone = self.main_window.coords(obstical)
+                if no_zone[0] < self.position[0] < no_zone[2] and no_zone[1] < self.position[1] < no_zone[3]:
+                    self.dead = True
 
             if calc_distance(self.position, Dot.goal_position) < 5:
                 self.reached_goal = True
