@@ -65,7 +65,7 @@ class Dot:
         update_array(self.position, self.velocity)
 
     
-    def update(self):
+    def update(self, obsticals):
         if not self.dead and not self.reached_goal:
             self.move()
 
@@ -74,6 +74,11 @@ class Dot:
 
             if self.position[1]+Dot.diameter >= self.root.winfo_height() - 15 or self.position[1]<0:
                 self.dead = True
+                
+            for obstical in obsticals.obsticals:
+                no_zone = self.main_window.coords(obstical)
+                if no_zone[0] < self.position[0] < no_zone[2] and no_zone[1] < self.position[1] < no_zone[3]:
+                    self.dead = True
 
             if calc_distance(self.position, Dot.goal_position) < 5:
                 self.reached_goal = True
@@ -126,12 +131,12 @@ class Population:
         self.size = size
         self.dots = [Dot(root, main_window) for x in range(size)]
     
-    def update(self):
+    def update(self, obsticals):
         for dot in self.dots:
             if dot.brain.step > Population.min_step:
                 dot.dead = True
             else:
-                dot.update()
+                dot.update(obsticals)
 
     def calc_fitnesses(self):
         for dot in self.dots:
@@ -195,7 +200,42 @@ class Population:
                 count += 1
         return count
       
+        
+class Obstical:
+    def __init__(self, main_window, state=0):
+        self.main_window = main_window
+        self.state = state
+        self.color = 'black'
+        self.thickness = 20
+        self.obsticals = []
+        self.construct()
 
+    def construct(self):
+        if self.state == 0:
+            # without any obsticals
+            pass
+
+        elif self.state == 1:
+            # two holes in the corners like this ->   ---
+            self.obsticals.append(self.main_window.create_rectangle(200, 300, 600, 300+self.thickness, fill=self.color))
+        
+        elif self.state == 2:
+            # two paralel lines top of each other -> ---- \n\t----
+            self.obsticals.append(self.main_window.create_rectangle(0, 150, 550, 150+self.thickness, fill=self.color))
+            self.obsticals.append(self.main_window.create_rectangle(250, 350, 800, 350+self.thickness, fill=self.color))
+       
+        elif self.state == 3:
+            # just a hole in the right side like this -> ----- --- 
+            self.obsticals.append(self.main_window.create_rectangle(0, 300, 500, 300+self.thickness, fill=self.color))
+            self.obsticals.append(self.main_window.create_rectangle(600, 300, 800, 300+self.thickness, fill=self.color))
+
+        else:
+            # just a hole in the right side like this -> -- -- -- 
+            self.obsticals.append(self.main_window.create_rectangle(0, 300, 200, 300+self.thickness, fill=self.color))
+            self.obsticals.append(self.main_window.create_rectangle(300, 300, 500, 300+self.thickness, fill=self.color))
+            self.obsticals.append(self.main_window.create_rectangle(600, 300, 800, 300+self.thickness, fill=self.color))
+
+            
 
 def plot_progress(data, on=True):
     if on:
@@ -206,6 +246,7 @@ def plot_progress(data, on=True):
    
 WIDTH = 800
 HEIGHT = 600
+STATE = 4
 
 plt.figure(2)
 root = Tk()
@@ -217,6 +258,7 @@ curr_gen_label.pack()
 main_window.pack()
 
 goal = main_window.create_oval(Dot.goal_position[0], Dot.goal_position[1], Dot.goal_position[0]+Dot.goal_position[2], Dot.goal_position[1]+Dot.goal_position[2], fill='blue')
+obsticals = Obstical(main_window, state=STATE)  # 4th state
 population = Population(root, main_window, 1000)  # population is 1000
 root.update()
 total_reached_goal = []
@@ -231,6 +273,7 @@ while True:
     else:
         main_window.delete('all')
         goal = main_window.create_oval(Dot.goal_position[0], Dot.goal_position[1], Dot.goal_position[0]+Dot.goal_position[2], Dot.goal_position[1]+Dot.goal_position[2], fill='blue')
+        obsticals = Obstical(main_window, state=STATE)  # 4th state
         population.calc_fitnesses()
         total_reached_goal.append(population.how_many())
         population.natural_selection()
