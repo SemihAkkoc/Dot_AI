@@ -28,7 +28,7 @@ one hole in the right side of the screen
 ### State 4:
 two holes
 
-<img width="800" alt="Screen Shot 2022-01-24 at 00 41 40" src="https://user-images.githubusercontent.com/52207216/150699053-d609c34a-c53b-4982-ac12-3c426400904e.png" width="200" height="300" />
+<img width="800" alt="Screen Shot 2022-01-24 at 00 41 40" src="https://user-images.githubusercontent.com/52207216/150699053-d609c34a-c53b-4982-ac12-3c426400904e.png" width="100" height="300" />
 
 
 ## TODO:
