@@ -2,6 +2,7 @@ from tkinter import *
 from time import sleep
 from Population import Population
 from Dot import Dot
+from Obstical import Obstical
 import matplotlib.pyplot as plt
 
 
@@ -13,6 +14,7 @@ def plot_progress(data, on=True):
 
 WIDTH = 800
 HEIGHT = 600
+STATE = 4
 
 plt.figure(2)
 root = Tk()
@@ -25,6 +27,7 @@ main_window.pack()
 
 goal = main_window.create_oval(Dot.goal_position[0], Dot.goal_position[1], Dot.goal_position[0]+Dot.goal_position[2], Dot.goal_position[1]+Dot.goal_position[2], fill='blue')
 population = Population(root, main_window, 1000)  # population is 1000
+obsticals = Obstical(main_window, state=STATE)  # 4th state
 root.update()
 total_reached_goal = []
 
@@ -38,6 +41,7 @@ while True:
     else:
         main_window.delete('all')
         goal = main_window.create_oval(Dot.goal_position[0], Dot.goal_position[1], Dot.goal_position[0]+Dot.goal_position[2], Dot.goal_position[1]+Dot.goal_position[2], fill='blue')
+        obsticals = Obstical(main_window, state=STATE)  # 4th state
         population.calc_fitnesses()
         total_reached_goal.append(population.how_many())
         population.natural_selection()
