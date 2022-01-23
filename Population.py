@@ -9,12 +9,12 @@ class Population:
         self.size = size
         self.dots = [Dot(root, main_window) for x in range(size)]
     
-    def update(self):
+    def update(self, obsticals):
         for dot in self.dots:
             if dot.brain.step > Population.min_step:
                 dot.dead = True
             else:
-                dot.update()
+                dot.update(obsticals)
 
     def calc_fitnesses(self):
         for dot in self.dots:
