@@ -6,6 +6,10 @@ In this programme I learned about how to implement natural selection and mutatio
 
 ## TODO:
 creating obsticals
+
 better fit function
+
+
+
 
 this is a little environment that simulates natural selection and mutations
