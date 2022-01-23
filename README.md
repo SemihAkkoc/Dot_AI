@@ -5,6 +5,13 @@ In this programme I learned about how to implement natural selection and mutatio
 ![this_new](https://user-images.githubusercontent.com/52207216/150684633-23abe331-5055-442b-a476-7638671d742b.gif)
 
 ## Obsticals:
+State 1:
+
+State 2:
+
+State 3:
+
+State 4:
 
 
 ## TODO:
