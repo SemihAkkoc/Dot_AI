@@ -59,7 +59,7 @@ class Dot:
             self.brain.step += 1
 
         else:
-            dead = True
+            self.dead = True
 
         update_array(self.velocity, self.acceleration, limit=True)
         update_array(self.position, self.velocity)
