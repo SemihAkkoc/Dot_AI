@@ -4,9 +4,9 @@ In this programme I learned about how to implement natural selection and mutatio
 
 ![this_new](https://user-images.githubusercontent.com/52207216/150684633-23abe331-5055-442b-a476-7638671d742b.gif)
 
-## Obsticals:
+## Obstacles:
 ### State 0: 
-without any obsticals
+without any obstacles
 
 <img width="803" alt="Screen Shot 2022-01-24 at 00 40 40" src="https://user-images.githubusercontent.com/52207216/150699032-d94ba9ca-3d2e-4acd-b691-3eb599d27364.png">
 
@@ -32,7 +32,7 @@ two holes
 
 
 ## TODO:
-- [x] creating obsticals
+- [x] creating obstacles
 
 - [ ] better fit function
 
