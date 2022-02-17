@@ -36,6 +36,6 @@ two holes
 
 - [ ] better fit function
 
-- [ ] better readme file (Ulas can you help me with my readme file if you can thanks in advance)
+- [x] better readme file (Ulas can you help me with my readme file if you can thanks in advance)
  - - - -
 this is a little environment that simulates natural selection and mutations
